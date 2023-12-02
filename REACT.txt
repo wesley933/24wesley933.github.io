@@ -1,0 +1,113 @@
+class No:
+ def __init__(self, valor):
+ self.valor = valor
+ self.esquerda = None
+ self.direita = None
+
+def inserir(arvore, valor):
+
+ if arvore is None:
+ return No(valor)
+    
+
+if valor < arvore.valor:
+
+ arvore.esquerda = inserir(arvore.esquerda, valor)
+
+ elif valor > arvore.valor:
+
+ arvore.direita = inserir(arvore.direita, valor)
+    
+ return arvore
+
+def remover(arvore, valor):
+
+if arvore is None:
+
+  return arvore
+    
+if valor < arvore.valor:
+
+ arvore.esquerda = remover(arvore.esquerda, valor)
+
+elif valor > arvore.valor:
+
+ arvore.direita = remover(arvore.direita, valor)
+else:
+if arvore.esquerda is None:
+
+ return arvore.direita
+
+ elif arvore.direita is None:
+
+ return arvore.esquerda
+        
+ arvore.valor = encontrar_minimo(arvore.direita)
+
+ arvore.direita = remover(arvore.direita, arvore.valor)
+    
+ return arvore
+
+def encontrar_minimo(arvore):
+ while arvore.esquerda is not None:
+  arvore = arvore.esquerda
+ return arvore.valor
+
+def imprimir_em_ordem(arvore):
+
+  if arvore:
+
+        imprimir_em_ordem(arvore.esquerda)
+
+        print(arvore.valor, end=" ")
+
+        imprimir_em_ordem(arvore.direita)
+
+wesley1 = None
+lista1 = [45, 20, 30, 60, 81, 97, 100, 7, 8, 4]
+
+for valor in lista1:
+
+    wesley1 = inserir(wesley1, valor)
+
+print("Árvore 'wesley1' antes da remoção:")
+
+imprimir_em_ordem(wesley1)
+
+print("\n")
+
+
+wesley1 = inserir(wesley1, 25)
+wesley1 = remover(wesley1, 30)
+
+print("Árvore 'wesley1' após adição e remoção:")
+
+imprimir_em_ordem(wesley1)
+
+print("\n")
+
+
+wesley2 = None
+
+lista2 = [15, 6, 18, 3, 7, 16, 20, 4]
+
+
+for valor in lista2:
+
+    wesley2 = inserir(wesley2, valor)
+
+
+print("Árvore 'wesley2' antes da remoção:")
+
+imprimir_em_ordem(wesley2)
+
+print("\n")
+
+
+wesley2 = inserir(wesley2, 10)
+wesley2 = remover(wesley2, 15)
+
+
+print("Árvore 'wesley2' após adição e remoção:")
+
+imprimir_em_ordem(wesley2)
